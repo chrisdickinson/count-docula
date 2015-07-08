@@ -1,0 +1,43 @@
+{
+  "name": "count-docula",
+  "version": "1.0.0",
+  "description": "a documentation generator",
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/chrisdickinson/count-docula.git"
+  },
+  "keywords": [
+    "documentation",
+    "generator"
+  ],
+  "author": "Chris Dickinson <chris@neversaw.us> (http://neversaw.us/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chrisdickinson/count-docula/issues"
+  },
+  "homepage": "https://github.com/chrisdickinson/count-docula#readme",
+  "devDependencies": {
+    "tape": "^4.0.0"
+  },
+  "dependencies": {
+    "eslint": "^0.24.0",
+    "graceful-fs": "^4.1.2",
+    "handlebars": "^3.0.3",
+    "ls-stream": "^1.0.0",
+    "mdast": "^0.25.0",
+    "mdast-html": "^0.1.0",
+    "mdast-lint": "^0.3.0",
+    "mdast-man": "^0.2.0",
+    "mdast-toc": "^0.5.0",
+    "mdast-yaml": "^0.3.1",
+    "mdast-yaml-config": "^0.2.0",
+    "minimist": "^1.1.1",
+    "mkdirp": "^0.5.1",
+    "once": "^1.3.2",
+    "resolve": "^1.1.6"
+  }
+}
