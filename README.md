@@ -5,6 +5,22 @@ markdown syntax for exporting, importing, and declaring links.
 
 ## Table of Contents
 
+-   [For Authors:](#for-authors)
+
+    -   [Introduction & Example](#introduction--example)
+    -   [Command Line Interface](#command-line-interface)
+    -   [Common Errors](#common-errors)
+
+-   [For Builders:](#for-builders)
+
+    -   [Setting Up A Docs Dir](#setting-up-a-docs-dir)
+    -   [Configuration](#configuration)
+    -   [Layouts](#layouts)
+
+-   [Contributing](#contributing)
+
+-   [License](#license)
+
 ## For Authors:
 
 ### Introduction & Example
