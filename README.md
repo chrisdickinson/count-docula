@@ -8,7 +8,13 @@ markdown syntax for exporting, importing, and declaring links.
 -   [For Authors:](#for-authors)
 
     -   [Introduction & Example](#introduction--example)
+
+        -   [[](!anchor my-anchor-name)](#anchor-my-anchor-name)
+        -   [[](!export my-anchor-name)](#export-my-anchor-name)
+        -   [[](!import "./path/to/document.md" as local-name)](#import-pathtodocumentmd-as-local-name)
+
     -   [Command Line Interface](#command-line-interface)
+
     -   [Common Errors](#common-errors)
 
 -   [For Builders:](#for-builders)
@@ -25,53 +31,93 @@ markdown syntax for exporting, importing, and declaring links.
 
 ### Introduction & Example
 
+Count Docula adds three directives, which take the form of empty inline links,
+like so:
+
 ```markdown
-[](!comment
-  count docula adds four directives, which take the form
-  of empty inline links. The first directive is "comment",
-  which simply ignores the rest of the link.
+[](!import "./path/doc.md" as filename)
+[](!anchor my-anchor-name)
+[](!export my-anchor-name)
+```
 
-anchor:
+The directives are used to _declare dependencies_ on other documents and import
+the anchors they export for linking.
 
-  The next directive is "anchor", which lets the author
-  explicitly name a deep link within their document. The
-  id attribute of the nearest block element is augmented
-  with the new, user-defined id:
-)
+#### `[](!anchor my-anchor-name)`
 
-## Some very-complicated heading [](!anchor easy-anchor)
+The `anchor` directive allows authors to explicitly give block-level elements a
+well-known "id" attribute. It solves the following problems:
 
-Some prose text. It'd be great to link directly to a paragraph
-within this text, wouldn't it? [](!anchor my-prose)
+-   Having to guess how a heading's text will be turned into an anchor.
+-   Being able to deep-link to non-heading elements, like block quotes and
+    paragraphs.
 
-[](!comment
+It will add the user-supplied anchor name to the closest surrounding block
+element, and will be available for _reference links_. For example:
 
-export:
+```markdown
+This is a very descriptive paragraph that I'd like to reference. It's
+incredible the amount of care and attention it took to write. I am
+amazed. [](!anchor my-amazing-paragraph)
 
-  To make your local links available to other documents, you
-  can export them (like `exports.abcdef = value` in Node.) All
-  anchors are "hoisted", so you can export an anchor before its
-  defined.
-)
+Have you seen [this paragraph?][my-amazing-paragraph] It's a really good
+paragraph.
+```
 
-[](!export easy-anchor)
-[](!export some-future-defined-anchor)
-This is okay too! [](!anchor some-future-defined-anchor)
+These anchors are **hoisted** — they will be collected before any further
+steps are run on the markdown source. As such you can use them in reference
+links before they're defined, or pass them to the `export` directive.
 
-You can even use these anchors with ref-links, [like so][easy-anchor].
+```markdown
+[](!export the-suspense)
 
-[](!comment
+Get ready for a [mind-blowing experience][the-suspense].
 
-import:
+### Boo. [](!anchor the-suspense)
+```
 
-  To access another document's links, you can import it! The
-  import resolution works *exactly* like Node's.
-)
+Anchors will be checked for uniqueness when running `count-docula test`.
 
-[](!import "./some/other/document.md" as other-doc)
+#### `[](!export my-anchor-name)`
 
-You can [link to][other-doc.some-inner-link] the other doc's anchors.
-You can even use the name to link to [the doc itself][other-doc].
+Anchors declared with the `anchor` directive may be exported for other
+documents to use using the `export` directive.
+
+```markdown
+[](!export my-link)
+
+### Oh look, I'd like folks to link to me [](!anchor my-link)
+
+It's okay to export after the fact too. [](!anchor an-example)
+
+[](!export an-example)
+```
+
+#### `[](!import "./path/to/document.md" as local-name)`
+
+The `import` directive will make a document (and all of its exported
+anchors) available for linking in the local document under the name
+provided.
+
+Like the other directives, `import` directives are hoisted and may
+follow links used from them.
+
+To use a link from another document, refer to it using `localname.inner-link`:
+
+```markdown
+[](!import "./path/to/doc.md" as other-doc)
+
+I'd like to link to a subsection of [this other doc][other-doc.subsection].
+```
+
+These inner links will be verified by `count-docula test`.
+
+You may link to the other document by referring to the name directly:
+
+```markdown
+[](!import "./path/to/doc.md" as other-doc)
+
+Check out this [sweet document][other-doc].
 ```
 
 ### Command Line Interface
