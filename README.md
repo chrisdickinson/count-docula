@@ -120,6 +120,10 @@ You may link to the other document by referring to the name directly:
 Check out this [sweet document][other-doc].
 ```
 
+The path to import follows the node module resolution algorithm, so you can
+link to documents from installed packages to bring them in as part of your
+build process.
+
 ### Command Line Interface
 
 ### Common Errors
