@@ -9,9 +9,9 @@ markdown syntax for exporting, importing, and declaring links.
 
     -   [Introduction & Example](#introduction--example)
 
-        -   [[](!anchor my-anchor-name)](#anchor-my-anchor-name)
-        -   [[](!export my-anchor-name)](#export-my-anchor-name)
-        -   [[](!import "./path/to/document.md" as local-name)](#import-pathtodocumentmd-as-local-name)
+        -   [`[](!anchor my-anchor-name)`](#anchor-my-anchor-name)
+        -   [`[](!export my-anchor-name)`](#export-my-anchor-name)
+        -   [`[](!import "./path/to/document.md" as local-name)`](#import-pathtodocumentmd-as-local-name)
 
     -   [Command Line Interface](#command-line-interface)
 
